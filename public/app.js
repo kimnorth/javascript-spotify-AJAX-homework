@@ -3,7 +3,7 @@ window.onload = function () {
     makeRequest(url, function () {
         if (this.status !== 200) return;
         var jsonString = this.responseText;
-        var results = JSON.parse(jsonString);
+        results = JSON.parse(jsonString);
         populateResults(results)
 
       });
@@ -17,5 +17,11 @@ var makeRequest = function (url, callback) {
 }
 
 var populateResults = function(results){
-  console.log(results);
+  // console.log(results);
+  var albumDiv = document.querySelector('#albums')
+  var text = "";
+  results.albums.items.forEach(function(album){
+    text += album.name + " "
+  })
+  albumDiv.innerText = text;
 }
