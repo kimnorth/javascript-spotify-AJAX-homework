@@ -1,25 +1,19 @@
 window.onload = function () {
-    var url = 'https://api.spotify.com/v1/search?q=cats&type=album';
-    makeRequest(url, function () {
-        if (this.status !== 200) return;
-        var jsonString = this.responseText;
-        results = JSON.parse(jsonString);
-        populateResults(results)
-
-      });
-  }  
-
-var makeRequest = function (url, callback) {
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.onload = callback;
-    request.send();
+    
+    var searchResults = new SearchResults('https://api.spotify.com/v1/search?q=cats&type=album')
+    searchResults.getData();
+    console.log("After:")
+    console.log(searchResults.resultsArray)
+    // populateResults(searchResults.resultsArray[0]);
 }
 
 var populateResults = function(results){
-  // console.log(results);
+
   var albumDiv = document.querySelector('#albums')
   var text = "";
+
+  console.log(results)
+
   results.albums.items.forEach(function(album){
     text += album.name + " "
   })
